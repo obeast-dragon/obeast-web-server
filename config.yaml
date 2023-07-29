@@ -1,0 +1,27 @@
+server:
+  #自定义端口号
+  port: 9999
+  #线程数量
+  thread_num: 10
+  #优雅关闭连接，默认不使用
+  grace_close: 1
+
+sql:
+  #数据库连接数量
+  connect: 8
+  mysql:
+    username: root
+    password: 1234qwer
+    db_name: yourdb
+
+epoll:
+  #listenfd和connfd的模式组合，默认使用LT + LT
+  use_LT_LT: 0
+  #选择反应堆模型，默认Proactor
+  reactor: 1
+
+log: 
+  #关闭日志，默认打开
+  close: 0
+  #选择日志写入方式，默认同步写入
+  is_aysnc: 1
