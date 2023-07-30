@@ -5,7 +5,7 @@
 #include <exception>
 #include <pthread.h>
 #include "../lock/locker.h"
-#include "../CGImysql/sql_connection_pool.h"
+#include "../db/sql_connection_pool.h"
 
 
 namespace obeast {
@@ -31,8 +31,8 @@ private:
     int m_max_requests;         //请求队列中允许的最大请求数
     pthread_t *m_threads;       //描述线程池的数组，其大小为m_thread_number
     std::list<T *> m_workqueue; //请求队列
-    locker m_queuelocker;       //保护请求队列的互斥锁
-    sem m_queuestat;            //是否有任务需要处理
+    Mutex m_queuelocker;       //保护请求队列的互斥锁
+    Semaphore m_queuestat;            //是否有任务需要处理
     connection_pool *m_connPool;  //数据库
     int m_actor_model;          //模型切换
 };

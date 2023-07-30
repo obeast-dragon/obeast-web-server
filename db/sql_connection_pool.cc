@@ -6,6 +6,7 @@
 #include <list>
 #include <pthread.h>
 #include <iostream>
+
 #include "sql_connection_pool.h"
 
 namespace obeast {
@@ -55,7 +56,7 @@ void connection_pool::init(std::string url, std::string User,
 		++m_FreeConn;
 	}
 
-	reserve = sem(m_FreeConn);
+	reserve = Semaphore(m_FreeConn);
 
 	m_MaxConn = m_FreeConn;
 }

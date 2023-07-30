@@ -6,24 +6,28 @@
 
 namespace obeast {
 
-class sem
+
+/**
+ * @brief 信号量
+ */
+class Semaphore
 {
 public:
-    sem()
+    Semaphore()
     {
         if (sem_init(&m_sem, 0, 0) != 0)
         {
             throw std::exception();
         }
     }
-    sem(int num)
+    Semaphore(int num)
     {
         if (sem_init(&m_sem, 0, num) != 0)
         {
             throw std::exception();
         }
     }
-    ~sem()
+    ~Semaphore()
     {
         sem_destroy(&m_sem);
     }
@@ -41,17 +45,17 @@ private:
 };
 
 
-class locker
+class Mutex
 {
 public:
-    locker()
+    Mutex()
     {
-        if (pthread_mutex_init(&m_mutex, NULL) != 0)
+        if (pthread_mutex_init(&m_mutex, nullptr) != 0)
         {
             throw std::exception();
         }
     }
-    ~locker()
+    ~Mutex()
     {
         pthread_mutex_destroy(&m_mutex);
     }
@@ -71,18 +75,23 @@ public:
 private:
     pthread_mutex_t m_mutex;
 };
-class cond
+
+
+/**
+ * @brief 条件变量
+ */
+class Cond
 {
 public:
-    cond()
+    Cond()
     {
-        if (pthread_cond_init(&m_cond, NULL) != 0)
+        if (pthread_cond_init(&m_cond, nullptr) != 0)
         {
             //pthread_mutex_destroy(&m_mutex);
             throw std::exception();
         }
     }
-    ~cond()
+    ~Cond()
     {
         pthread_cond_destroy(&m_cond);
     }

@@ -1,4 +1,4 @@
-#include "http_conn.h"
+#include "http_connext.h"
 
 #include <mysql/mysql.h>
 #include <fstream>
@@ -16,7 +16,7 @@ const char *error_404_form = "The requested file was not found on this server.\n
 const char *error_500_title = "Internal Error";
 const char *error_500_form = "There was an unusual problem serving the request file.\n";
 
-locker m_lock;
+Mutex m_lock;
 std::map<std::string, std::string> users;
 
 void http_conn::initmysql_result(connection_pool *connPool)
